@@ -1,29 +1,20 @@
-# README #
+# Bash
+[Bash](./Bash)
 
-This README would normally document whatever steps are necessary to get your application up and running.
+# Linguaggio_C
+[Linguaggio_C](./Linguaggio_C)
 
-### What is this repository for? ###
+# Linguaggio_C++
+[Linguaggio_C++](./Linguaggio_C++)
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+# Makefile
+[Makefile](./Makefile)
 
-### How do I get set up? ###
+# PBS
+[PBS](./PBS)
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+# Python
+[Python](./Python)
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+# perl
+[perl](./perl)
