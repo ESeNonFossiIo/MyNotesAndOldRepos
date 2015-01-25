@@ -11,7 +11,6 @@ function print_sharp {
   then  
     printf " - "
   else
-    printf "\n"
     printf "%0.s#" $(/usr/bin/seq 1 $1)
   fi
 }
@@ -40,6 +39,7 @@ do
         space="\t"
       elif [[ $(count_dept $file) == 1 ]]
         then
+        printf "\n\n"
         space="%0.s" 
       else
         space="%0.s"
