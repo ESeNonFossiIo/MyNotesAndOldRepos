@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# This tool provide a README.md of the folder
+# If there is some file named DESCRIPTION.md 
+#  the content of this file is added 
+#  to the README.md as comment.
+#
+
 function print_sharp { 
   if [[ $1 == 0 ]]
   then  
