@@ -11,6 +11,7 @@ function print_sharp {
   then  
     printf " - "
   else
+    printf "\n"
     printf "%0.s#" $(/usr/bin/seq 1 $1)
   fi
 }
