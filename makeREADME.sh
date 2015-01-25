@@ -1,0 +1,54 @@
+#!/bin/bash
+
+function print_sharp { 
+  if [[ $1 == 0 ]]
+  then  
+    printf " - "
+  else
+    printf "%0.s#" $(/usr/bin/seq 1 $1)
+  fi
+}
+
+function count_dept {
+  echo $1 | /usr/bin/grep -o '/' | /usr/bin/grep '/' -c
+}
+
+FILE=$(ls -R | sed 's#:# # ')
+# FILE=$(ls -R | tr "/" "\n")
+ABS_PATH=$PWD
+PATH=
+space="%0.s" 
+
+for file in $FILE;
+do
+  if [[ "$file" =~ (.\/) ]];
+    then	
+      PATH=$file
+      pathFile=$file
+      if [[ $(count_dept $file) -ge 3 ]]
+        then
+        space="\t\t"
+      elif [[ $(count_dept $file) == 2 ]]
+        then
+        space="\t"
+      elif [[ $(count_dept $file) == 1 ]]
+        then
+        space="%0.s" 
+      else
+        space="%0.s"
+      fi
+  else
+    pathFile=$PATH/$file
+  fi
+  if [[ "$file" =~ (DESCRIPTION.md) ]];
+    then
+    printf "\n > "
+    /bin/cat $pathFile
+    printf "\n"
+  else
+    printf $space
+    print_sharp $(count_dept $file)
+    printf "[$(echo $file | /usr/bin/sed 's#./# #')]($pathFile)"
+    printf "\n"
+  fi
+done
