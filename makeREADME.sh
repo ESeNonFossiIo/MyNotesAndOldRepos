@@ -9,7 +9,7 @@
 function print_sharp { 
   if [[ $1 == 0 ]]
   then  
-    printf " |_ "
+    printf " - "
   else
     printf "%0.s#" $(/usr/bin/seq 1 $1)
   fi
