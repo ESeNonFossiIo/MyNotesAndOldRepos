@@ -11,7 +11,7 @@ function print_sharp {
   then  
     printf " * "
   else
-    printf "\n"	  
+    # printf "\n"	  
     printf "%0.s#" $(/usr/bin/seq 1 $1)
   fi
 }
@@ -20,7 +20,7 @@ function count_dept {
   echo $1 | /usr/bin/grep -o '/' | /usr/bin/grep '/' -c
 }
 
-FILE=$(ls -R | sed 's#:# # ')
+FILE=$(ls -R | sed 's#:# # ' | sed "s#\n# #")
 # FILE=$(ls -R | tr "/" "\n")
 ABS_PATH=$PWD
 PATH=
@@ -34,10 +34,12 @@ do
       pathFile=$file
       if [[ $(count_dept $file) -ge 3 ]]
         then
-        space="\t\t"
+	space="%0.s"
+        # space="\t\t"
       elif [[ $(count_dept $file) == 2 ]]
         then
-        space="\t"
+	space="%0.s"	
+        # space="\t"
       elif [[ $(count_dept $file) == 1 ]]
         then
         printf "\n\n"
