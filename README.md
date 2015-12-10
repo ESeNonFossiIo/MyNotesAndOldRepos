@@ -1,9 +1,13 @@
  * [Bash](/Bash)
  * [CPP](/CPP)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * [LICENSE](/LICENSE)
 =======
 >>>>>>> update README
+=======
+ * [LICENSE](/LICENSE)
+>>>>>>> fix readme
  * [Makefile](/Makefile)
  * [PBS](/PBS)
  * [Python](/Python)
@@ -70,7 +74,6 @@
 =======
  * [makeDir](./Bash/makeDir)
  * [numRecognize.sh](./Bash/numRecognize.sh)
- * [regex_validator.sh](./Bash/regex_validator.sh)
 ##[ Bash/getopts](./Bash/getopts)
  * [getopts_00.sh](./Bash/getopts/getopts_00.sh)
  * [getopts_01.sh](./Bash/getopts/getopts_01.sh)
@@ -133,11 +136,8 @@
 >>>>>>> improvemtne in makeREADME -> \n before #
 =======
 #[ CPP](./CPP)
- * [fattoriale](./CPP/fattoriale)
  * [listDirectory](./CPP/listDirectory)
  * [permutazioni](./CPP/permutazioni)
-##[ CPP/fattoriale](./CPP/fattoriale)
- * [fattoriale.cpp](./CPP/fattoriale/fattoriale.cpp)
 ##[ CPP/listDirectory](./CPP/listDirectory)
  * [README.md](./CPP/listDirectory/README.md)
  * [_old](./CPP/listDirectory/_old)
@@ -154,9 +154,12 @@
  * [permutazioni_00_03.cpp](./CPP/permutazioni/permutazioni_00_03.cpp)
  * [permutazioni_01_00.cpp](./CPP/permutazioni/permutazioni_01_00.cpp)
  * [permutazioni_01_01.cpp](./CPP/permutazioni/permutazioni_01_01.cpp)
+<<<<<<< HEAD
  * [permutazioni_totali.txt](./CPP/permutazioni/permutazioni_totali.txt)
  * [permutazioni_trovate.txt](./CPP/permutazioni/permutazioni_trovate.txt)
 >>>>>>> update README
+=======
+>>>>>>> fix readme
 
 
 #[ Makefile](./Makefile)
@@ -184,16 +187,19 @@
 
 #[ Python](./Python)
  * [PDEs](./Python/PDEs)
- * [binary](./Python/binary)
  * [lib](./Python/lib)
 ##[ Python/PDEs](./Python/PDEs)
  * [generate_exact_solution.py](./Python/PDEs/generate_exact_solution.py)
+<<<<<<< HEAD
 >>>>>>> update README
 ##[ Python/binary](./Python/binary)
  * [binary_read.py](./Python/binary/binary_read.py)
 ##[ Python/lib](./Python/lib)
  * [AnsiIO.py](./Python/lib/AnsiIO.py)
 >>>>>>> improvemtne in makeREADME -> \n before #
+=======
+##[ Python/lib](./Python/lib)
+>>>>>>> fix readme
  * [__init__.py](./Python/lib/__init__.py)
  * [__init__.pyc](./Python/lib/__init__.pyc)
  * [font.py](./Python/lib/font.py)
