@@ -22,7 +22,7 @@ class progress_bar(object):
 		Progress is given as whole percentage, i.e. 50% done
 		is given by x = 50"""
 		y = int(x)%4
-		z = int((x/float(self.tot))*self.bar_lenght)                      
+		z = int((x/float(self.tot))*self.bar_lenght)
 		sys.stdout.write("#" * z + self.cp[y] +"-" * (self.bar_lenght-1 - z) + "]  "+ bold(str(int(x))+"/"+str(self.tot)) + chr(8) * (self.bar_lenght+4+len(str(int(x)))+len(str(self.tot)) ))
 		sys.stdout.flush()
 
