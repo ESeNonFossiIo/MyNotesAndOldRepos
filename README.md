@@ -1,6 +1,9 @@
  * [Bash](/Bash)
  * [CPP](/CPP)
+<<<<<<< HEAD
  * [LICENSE](/LICENSE)
+=======
+>>>>>>> update README
  * [Makefile](/Makefile)
  * [PBS](/PBS)
  * [Python](/Python)
@@ -8,17 +11,27 @@
  * [arduino](/arduino)
  * [java](/java)
  * [makeREADME.sh](/makeREADME.sh)
+<<<<<<< HEAD
  * [php](/php)
+=======
+
+>>>>>>> update README
 
 #[ Bash](./Bash)
 
  > a Brief description
 
+<<<<<<< HEAD
  * [USB](./Bash/USB)
  * [check_and_mkdir](./Bash/check_and_mkdir)
  * [find_and_replace](./Bash/find_and_replace)
  * [first_free_name](./Bash/first_free_name)
  * [get_next_dir](./Bash/get_next_dir)
+=======
+ * [explode.sh](./Bash/explode.sh)
+ * [findTheBiggest.sh](./Bash/findTheBiggest.sh)
+ * [first_free_name.sh](./Bash/first_free_name.sh)
+>>>>>>> update README
  * [getopts](./Bash/getopts)
 <<<<<<< HEAD
  * [various](./Bash/various)
@@ -66,6 +79,7 @@
  * [makeDir_01.sh](./Bash/makeDir/makeDir_01.sh)
 
 
+<<<<<<< HEAD
 #[ Linguaggio_C](./Linguaggio_C)
  * [HelloWorld.c](./Linguaggio_C/HelloWorld.c)
 
@@ -117,10 +131,37 @@
  * [permutazioni_trovate.txt](./Linguaggio_C++/permutazioni/permutazioni_trovate.txt)
  * [programma](./Linguaggio_C++/permutazioni/programma)
 >>>>>>> improvemtne in makeREADME -> \n before #
+=======
+#[ CPP](./CPP)
+ * [fattoriale](./CPP/fattoriale)
+ * [listDirectory](./CPP/listDirectory)
+ * [permutazioni](./CPP/permutazioni)
+##[ CPP/fattoriale](./CPP/fattoriale)
+ * [fattoriale.cpp](./CPP/fattoriale/fattoriale.cpp)
+##[ CPP/listDirectory](./CPP/listDirectory)
+ * [README.md](./CPP/listDirectory/README.md)
+ * [_old](./CPP/listDirectory/_old)
+ * [makefile](./CPP/listDirectory/makefile)
+ * [run.cpp](./CPP/listDirectory/run.cpp)
+###[ CPP/listDirectory/_old](./CPP/listDirectory/_old)
+ * [listDir.cpp](./CPP/listDirectory/_old/listDir.cpp)
+ * [split.cpp](./CPP/listDirectory/_old/split.cpp)
+##[ CPP/permutazioni](./CPP/permutazioni)
+ * [dizionario.txt](./CPP/permutazioni/dizionario.txt)
+ * [permutazioni_00_00.cpp](./CPP/permutazioni/permutazioni_00_00.cpp)
+ * [permutazioni_00_01.cpp](./CPP/permutazioni/permutazioni_00_01.cpp)
+ * [permutazioni_00_02.cpp](./CPP/permutazioni/permutazioni_00_02.cpp)
+ * [permutazioni_00_03.cpp](./CPP/permutazioni/permutazioni_00_03.cpp)
+ * [permutazioni_01_00.cpp](./CPP/permutazioni/permutazioni_01_00.cpp)
+ * [permutazioni_01_01.cpp](./CPP/permutazioni/permutazioni_01_01.cpp)
+ * [permutazioni_totali.txt](./CPP/permutazioni/permutazioni_totali.txt)
+ * [permutazioni_trovate.txt](./CPP/permutazioni/permutazioni_trovate.txt)
+>>>>>>> update README
 
 
 #[ Makefile](./Makefile)
  * [makefile](./Makefile/makefile)
+<<<<<<< HEAD
 
 #[ PBS](./PBS)
  * [template.pbs](./PBS/template.pbs)
@@ -134,6 +175,20 @@
 ##[ Python/lib](./Python/lib)
 =======
  * [plot](./Python/plot)
+=======
+
+
+#[ PBS](./PBS)
+ * [template.pbs](./PBS/template.pbs)
+
+
+#[ Python](./Python)
+ * [PDEs](./Python/PDEs)
+ * [binary](./Python/binary)
+ * [lib](./Python/lib)
+##[ Python/PDEs](./Python/PDEs)
+ * [generate_exact_solution.py](./Python/PDEs/generate_exact_solution.py)
+>>>>>>> update README
 ##[ Python/binary](./Python/binary)
  * [binary_read.py](./Python/binary/binary_read.py)
 ##[ Python/lib](./Python/lib)
@@ -146,6 +201,7 @@
  * [progress_bar.py](./Python/lib/progress_bar.py)
  * [progress_bar.pyc](./Python/lib/progress_bar.pyc)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 #[ arduino](./arduino)
@@ -156,6 +212,8 @@
  * [file.dat](./Python/plot/file.dat)
  * [plot.py](./Python/plot/plot.py)
 >>>>>>> improvemtne in makeREADME -> \n before #
+=======
+>>>>>>> update README
 
 
 #[ java](./java)
@@ -163,6 +221,7 @@
  * [ClickCircle.java](./java/ClickCircle.java)
  * [MuoviCerchio.java](./java/MuoviCerchio.java)
  * [makefile](./java/makefile)
+<<<<<<< HEAD
 
 
 <<<<<<< HEAD
@@ -178,3 +237,5 @@
  * [print_name.pl](./perl/print_name.pl)
  * [string.pl](./perl/string.pl)
 >>>>>>> improvemtne in makeREADME -> \n before #
+=======
+>>>>>>> update README
