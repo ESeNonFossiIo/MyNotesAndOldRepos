@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-IN="bla@some.com;john@home.com"
+IN="nome1;nome2;nome3"
 
 arr=$(echo $IN | tr ";" "\n")
 
