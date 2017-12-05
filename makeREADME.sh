@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # This tool provide a README.md of the folder
-# If there is some file named DESCRIPTION.md 
-#  the content of this file is added 
+# If there is some file named DESCRIPTION.md
+#  the content of this file is added
 #  to the README.md as comment.
 #
 
-function print_sharp { 
+function print_sharp {
   if [[ $1 == 0 ]]
-  then  
+  then
     printf " * "
   else
-    # printf "\n"	  
+    # printf "\n"
     printf "%0.s#" $(/usr/bin/seq 1 $1)
   fi
 }
@@ -24,12 +24,12 @@ FILE=$(ls -R | sed 's#:# # ' | sed "s#\n# #")
 # FILE=$(ls -R | tr "/" "\n")
 ABS_PATH=$PWD
 PATH=
-space="%0.s" 
+space="%0.s"
 
 for file in $FILE;
 do
   if [[ "$file" =~ (.\/) ]];
-    then	
+    then
       PATH=$file
       pathFile=$file
       if [[ $(count_dept $file) -ge 3 ]]
@@ -38,12 +38,12 @@ do
         # space="\t\t"
       elif [[ $(count_dept $file) == 2 ]]
         then
-	space="%0.s"	
+	space="%0.s"
         # space="\t"
       elif [[ $(count_dept $file) == 1 ]]
         then
         printf "\n\n"
-        space="%0.s" 
+        space="%0.s"
       else
         space="%0.s"
       fi
@@ -61,4 +61,5 @@ do
     printf "[$(echo $file | /usr/bin/sed 's#./# #')]($pathFile)"
     printf "\n"
   fi
+  printf "\n"
 done
