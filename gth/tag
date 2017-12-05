@@ -1,0 +1,47 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "${DIR}/_conf.sh"
+
+echo -n "Update? [MAJOR|MINOR|REVISION] ......... "
+read UPDATE
+echo -n "Commit? ................................ "
+read COMMIT
+
+TAG=$(git describe $(git rev-list --tags --max-count=1))
+LAST_TAG=`echo ${TAG} | sed 's#V##g'`
+LAST_COMMIT=`git log | head -1 | sed 's#commit ##g'`
+STATUS="false"
+
+a=( ${LAST_TAG//./ } )
+if [ "${UPDATE}" == "MAJOR" ]
+then
+  ((a[0]++))                              # increment major (or other part)
+  a[1]=0
+  a[2]=0
+  STATUS="true"
+fi
+if [ "${UPDATE}" == "MINOR" ]
+then
+  ((a[1]++))                              # increment minor (or other part)
+  a[2]=0
+  STATUS="true"
+fi
+if [ "${UPDATE}" == "REVISION" ]
+then
+  ((a[2]++))                              # increment revision (or other part)
+  STATUS="true"
+fi
+
+if [ "${STATUS}" == "true" ]
+then
+  echo "Version ............ ${a[0]}.${a[1]}.${a[2]}" | tee    "VERSION"
+  echo "Commit ............. ${LAST_COMMIT}"          | tee -a "VERSION"
+  echo "Commit msg ......... ${COMMIT}"               | tee -a "VERSION"
+
+  git tag -a "V${a[0]}.${a[1]}.${a[2]}" -m "${COMMIT}"
+
+  ${SCRIPTS_PATH}/generate_readme
+  git add "README.md" "VERSION"
+  git commit --amend
+fi

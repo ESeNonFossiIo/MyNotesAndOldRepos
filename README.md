@@ -16,6 +16,7 @@ It automatically updates the revision number.
 ## Version V0
 |TAG|COMMIT|
 |---|------|
+|V0.0.3|Add tag|
 |V0.0.2|Add generate_readme|
 |V0.0.1|Add generate_readme|
 |V0.0.0|Init|
