@@ -16,8 +16,12 @@
  * [java](/java)
  * [makeREADME.sh](/makeREADME.sh)
 <<<<<<< HEAD
+<<<<<<< HEAD
  * [php](/php)
 =======
+=======
+ * [php](/php)
+>>>>>>> Add generate_exact_solution.py
 
 >>>>>>> update README
 
@@ -26,11 +30,15 @@
  > a Brief description
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add generate_exact_solution.py
  * [USB](./Bash/USB)
  * [check_and_mkdir](./Bash/check_and_mkdir)
  * [find_and_replace](./Bash/find_and_replace)
  * [first_free_name](./Bash/first_free_name)
  * [get_next_dir](./Bash/get_next_dir)
+<<<<<<< HEAD
 =======
  * [explode.sh](./Bash/explode.sh)
  * [findTheBiggest.sh](./Bash/findTheBiggest.sh)
@@ -38,6 +46,9 @@
 >>>>>>> update README
  * [getopts](./Bash/getopts)
 <<<<<<< HEAD
+=======
+ * [getopts](./Bash/getopts)
+>>>>>>> Add generate_exact_solution.py
  * [various](./Bash/various)
 ##[ Bash/USB](./Bash/USB)
  * [detech.sh](./Bash/USB/detech.sh)
@@ -47,6 +58,7 @@
  * [make_dir_01.sh](./Bash/first_free_name/make_dir_01.sh)
 ###[ Bash/first_free_name/lib](./Bash/first_free_name/lib)
  * [utilities.sh](./Bash/first_free_name/lib/utilities.sh)
+<<<<<<< HEAD
 ##[ Bash/getopts](./Bash/getopts)
  * [getopts_00.sh](./Bash/getopts/getopts_00.sh)
  * [getopts_01.sh](./Bash/getopts/getopts_01.sh)
@@ -74,12 +86,15 @@
 =======
  * [makeDir](./Bash/makeDir)
  * [numRecognize.sh](./Bash/numRecognize.sh)
+=======
+>>>>>>> Add generate_exact_solution.py
 ##[ Bash/getopts](./Bash/getopts)
  * [getopts_00.sh](./Bash/getopts/getopts_00.sh)
  * [getopts_01.sh](./Bash/getopts/getopts_01.sh)
-##[ Bash/makeDir](./Bash/makeDir)
- * [makeDir_00.sh](./Bash/makeDir/makeDir_00.sh)
- * [makeDir_01.sh](./Bash/makeDir/makeDir_01.sh)
+##[ Bash/various](./Bash/various)
+ * [explode.sh](./Bash/various/explode.sh)
+ * [find_the_biggest.sh](./Bash/various/find_the_biggest.sh)
+ * [num_recognize.sh](./Bash/various/num_recognize.sh)
 
 
 <<<<<<< HEAD
@@ -140,12 +155,8 @@
  * [permutazioni](./CPP/permutazioni)
 ##[ CPP/listDirectory](./CPP/listDirectory)
  * [README.md](./CPP/listDirectory/README.md)
- * [_old](./CPP/listDirectory/_old)
  * [makefile](./CPP/listDirectory/makefile)
  * [run.cpp](./CPP/listDirectory/run.cpp)
-###[ CPP/listDirectory/_old](./CPP/listDirectory/_old)
- * [listDir.cpp](./CPP/listDirectory/_old/listDir.cpp)
- * [split.cpp](./CPP/listDirectory/_old/split.cpp)
 ##[ CPP/permutazioni](./CPP/permutazioni)
  * [dizionario.txt](./CPP/permutazioni/dizionario.txt)
  * [permutazioni_00_00.cpp](./CPP/permutazioni/permutazioni_00_00.cpp)
@@ -222,15 +233,24 @@
 >>>>>>> update README
 
 
+#[ arduino](./arduino)
+ * [potenziometro.py](./arduino/potenziometro.py)
+
+
 #[ java](./java)
  * [ArrayOfArrayOfInt.java](./java/ArrayOfArrayOfInt.java)
  * [ClickCircle.java](./java/ClickCircle.java)
  * [MuoviCerchio.java](./java/MuoviCerchio.java)
  * [makefile](./java/makefile)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 <<<<<<< HEAD
+=======
+
+
+>>>>>>> Add generate_exact_solution.py
 #[ php](./php)
  * [files_manipolation](./php/files_manipolation)
  * [test.php](./php/test.php)
@@ -238,6 +258,7 @@
  * [while.php~](./php/while.php~)
 ##[ php/files_manipolation](./php/files_manipolation)
  * [read_files.php](./php/files_manipolation/read_files.php)
+<<<<<<< HEAD
 =======
 #[ perl](./perl)
  * [print_name.pl](./perl/print_name.pl)
@@ -245,3 +266,5 @@
 >>>>>>> improvemtne in makeREADME -> \n before #
 =======
 >>>>>>> update README
+=======
+>>>>>>> Add generate_exact_solution.py
