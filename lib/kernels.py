@@ -1,6 +1,8 @@
+from __future__ import division
+
 from functions import gaussian
 
-from numpy import array, sqrt
+from numpy import array, sqrt, outer
 from numpy import sum as npsum
 
 def gaussian_kernel(**kwargs):
@@ -10,18 +12,16 @@ def gaussian_kernel(**kwargs):
     integer = kwargs.get('integer', False)
 
     x       = array(range(-s,s+1))
-    xx      = array([x*x])
-    m       = sqrt(xx + xx.T)
-    m      /= npsum(m)
+    g       = gaussian(x, mu=mu, sigma=sigma)
+    m       = outer(g,g)
 
     if integer:
-        g   = gaussian(m, mu=mu, sigma=sigma)
-        gi  = (g*(1/g[0,0])).astype(int)
+        gi  = (m/m[0,0]).astype(int)
         return gi, npsum(gi)
     else:
-        return gaussian(m, mu=mu, sigma=sigma), 1.0
+        return m, npsum(m)
 
 def sobel_kernel():
     x = array([[1,2,1]])
-    y = array([range(-1,2,1)])
+    y = array([range(1,-2,-1)])
     return x.T*y, (x.T*y).T
