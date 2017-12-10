@@ -99,6 +99,6 @@ savefig(name+"_thresholding"+ext)
 show()
 
 axis('off')
-savefig(name+"_edge"+ext)
 imshow(edge)
+savefig(name+"_edge"+ext)
 show()
