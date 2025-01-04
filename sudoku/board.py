@@ -1,5 +1,7 @@
-import numpy as np
+""" Module to represent a sudoku board. """
 from collections import Counter
+import numpy as np
+from .shell import board_to_str
 
 
 def _check_no_duplicates(values):
@@ -14,6 +16,26 @@ def _check_no_duplicates(values):
                 for value, count in Counter(values).items()])
 
 
+def _is_a_valid_board(board):
+    """ Check if the board is valid. i.e., if there are no duplicates in rows, columns and sub-grids.
+        Args:
+            board (numpy.array): Board to be checked.
+        Returns:
+            bool: True if the board is valid, False otherwise.
+    """
+    for i in range(9):
+        if not _check_no_duplicates(board[i, :]):
+            return False
+        if not _check_no_duplicates(board[:, i]):
+            return False
+    for i in range(3):
+        for j in range(3):
+            ic, jc = 3 * i, 3 * j
+            if not _check_no_duplicates(board[ic:ic + 3, jc:jc + 3].flatten()):
+                return False
+    return True
+
+
 def _check_valid_value(value):
     """ Check if the value is valid, i.e., if it is between 0 and 9.
         Args:
@@ -23,7 +45,56 @@ def _check_valid_value(value):
     """
     return 0 <= value <= 9
 
-# TODO: function to print difference between boards using colors
+
+def _generate_rnd_board_using_backtracking(seed=None):
+    """ Generate a random board using backtracking.
+        Args:
+            seed (int): Seed for the random number generator. Default is None.
+        Returns:
+            numpy.array: Random board.
+    """
+
+    if seed is not None:
+        np.random.seed(seed)
+
+    board = np.zeros((9, 9), dtype=int)
+
+    def _find_empty_location(board, location):
+        """ Find an empty location in the board.
+            Args:
+                board (numpy.array): Board.
+                location (list): List to store the location.
+            Returns:
+                bool: True if there is an empty location, False otherwise.
+        """
+        for i in range(9):
+            for j in range(9):
+                if board[i, j] == 0:
+                    location[0] = i
+                    location[1] = j
+                    return True
+        return False
+
+    def _solve_board(board):
+        location = [0, 0]
+        if not _find_empty_location(board, location):
+            return True, board
+        row, col = location
+        values = np.random.permutation(range(1, 10))
+
+        board2 = board.copy()
+        for num in values:
+            board2[row, col] = num
+            if _is_a_valid_board(board2):
+                status, board3 = _solve_board(board2)
+                if status:
+                    return True, board3
+                else:
+                    board2[row, col] = 0
+
+        return False, board
+
+    return _solve_board(board)
 
 
 class Board(object):
@@ -44,32 +115,19 @@ class Board(object):
         # valid.
         self.__values = np.ones((9, 9, 9), dtype=bool)
 
-    @staticmethod
-    def __get_matrix_as_string(matrix):
-        """ Return a string representation of the matrix.
-            Args:
-                matrix (numpy.array): Matrix to be represented.
+    def __repr__(self):
+        """ Return a string representation of the board.
             Returns:
-                str: String representation of the matrix.
+                str: String representation of the board.
         """
-        s = ""
-        for i in range(9):
-            if i % 3 == 0:
-                s += "+---------+---------+---------+" + "\n"
-            for j in range(9):
-                if j % 3 == 0:
-                    s += "|"
-                s += " {} ".format(matrix[i, j] == 0 and " " or matrix[i, j])
-            s += "|" + "\n"
-        s += "+---------+---------+---------+" + "\n"
-        return s
+        return self.__board.__repr__()
 
     def __str__(self):
         """ Return a string representation of the board.
             Returns:
                 str: String representation of the board.
         """
-        return self.__get_matrix_as_string(self.__board)
+        return board_to_str(self.__board)
 
     def values_matrix(self, index):
         """ Return a string representation of the values matrix.
@@ -78,62 +136,33 @@ class Board(object):
             Returns:
                 str: String representation of the values matrix.
         """
-        return self.__get_matrix_as_string(self.__values[:, :, index-1]).replace('True', 'X').replace('False', ' ')
+        return board_to_str(self.__values[:, :, index-1]).replace('True', 'X').replace('False', ' ')
 
     def get_board(self):
         """ Return the board.
             Returns:
                 numpy.array: Board.
         """
-        return self.__board
+        return self.__board.copy()
 
     def __setitem__(self, key, value):
         """ Set the value of a cell in the board.
-
             Args:
                 key (int, int): Tuple with the coordinates of the cell.
                 value (int): Value to be set in the cell.
         """
         assert _check_valid_value(value)
         self.__board[key] = value
-        # TODO: can we avoid updating all the values? just work on key?
         self.__update_values()
 
     def __getitem__(self, key):
         """ Get the value of a cell in the board.
-
             Args:
                 key (int, int): Tuple with the coordinates of the cell.
-
             Returns:
                 int: Value of the cell.
         """
         return self.__board[key]
-
-    def n_missing_values(self):
-        """ Return the number of missing values in the board.
-
-            Returns:
-                int: Number of missing values in the board.
-        """
-        return (self.__board == 0).sum()
-
-    def isValid(self):
-        """ Check if the board is valid. i.e., if there are no duplicates in rows, columns and sub-grids.
-
-            Returns:
-                bool: True if the board is valid, False otherwise.
-        """
-        # Check if there are no duplicates in the rows, columns and sub-grids.
-        if not all([_check_no_duplicates(self.__board[i, :]) for i in range(9)]):
-            return False
-        elif not all([_check_no_duplicates(self.__board[:, i]) for i in range(9)]):
-            return False
-        elif not all([_check_no_duplicates(self.__board[3 * i:3 * i + 3, 3 * j:3 * j + 3].flatten())
-                      for i in range(3) for j in range(3)]):
-            return False
-        else:
-            return True
 
     def __update_values(self):
         """ Update the values of the board using the values of __board. """
@@ -154,7 +183,7 @@ class Board(object):
                     self.__values[i, j, :] = False
                     self.__values[i, j, index] = True
 
-        # TODO
+        # Set the values of the rows, columns and sub-grids that contain all the True values
         for i in range(9):
             for j in range(9):
                 if self.__board[i, j] == 0:
@@ -164,16 +193,16 @@ class Board(object):
                         # Indices of the sub-grid
                         ig, jg = 3 * (i // 3), 3 * (j // 3)
                         # Rows:
-                        nTrueRow = self.__values[i, :, k].sum()
-                        nTrueRowSubGrid = self.__values[i, jg:jg + 3, k].sum()
-                        if nTrueRow == nTrueRowSubGrid:
+                        n_true_row = self.__values[i, :, k].sum()
+                        n_true_row_sub_grid = self.__values[i, jg:jg + 3, k].sum()
+                        if (n_true_row == n_true_row_sub_grid) and (n_true_row > 0):
                             for ii in range(3):
                                 if ii != i % 3:
                                     self.__values[ig + ii, jg:jg + 3, k] = False
                         # Columns:
-                        nTrueCol = self.__values[:, j, k].sum()
-                        nTrueColSubGrid = self.__values[ig:ig + 3, j, k].sum()
-                        if nTrueCol == nTrueColSubGrid:
+                        n_true_col = self.__values[:, j, k].sum()
+                        n_true_col_sub_grid = self.__values[ig:ig + 3, j, k].sum()
+                        if (n_true_col == n_true_col_sub_grid) and (n_true_col > 0):
                             for jj in range(3):
                                 if jj != j % 3:
                                     self.__values[ig:ig + 3, jg + jj, k] = False
@@ -188,6 +217,11 @@ class Board(object):
                 elif self.__values[j, :, k].sum() == 1:
                     index = np.where(self.__values[j, :, k])[0][0]
                     self.__board[j, index] = k + 1
+        for i in range(9):
+            for j in range(9):
+                if self.__values[i, j, :].sum() == 1:
+                    index = self.available_values(i, j)[0]
+                    self.__board[i, j] = index + 1
         for i in range(3):
             for j in range(3):
                 ic, jc = 3 * i, 3 * j
@@ -199,15 +233,58 @@ class Board(object):
 
     def set_matrix(self, matrix: list[list[int]]):
         """ Set the values of the board using a matrix.
-
             Args:
                 matrix (list of lists): List of lists with the values of the board.
         """
-        # TODO: assert matrix.shape == (9, 9)
+        assert len(matrix) == 9, "The matrix must have 9 rows."
+        assert all([len(row) == 9 for row in matrix]), "Each row must have 9 columns."
+        # Set the values of the board
         self.__board = np.array(matrix)
         # Reset the values of __values
         self.__values = np.ones((9, 9, 9), dtype=bool)
         self.__update_values()
+
+    def n_missing_values(self):
+        """ Return the number of missing values in the board.
+            Returns:
+                int: Number of missing values in the board.
+        """
+        return (self.__board == 0).sum()
+
+    @classmethod
+    def random_board(cls, seed=None):
+        """ Generate a valid random board.
+            Args:
+                seed (int): Seed for the random number generator. Default is None.
+            Returns:
+                numpy.array: Random board.
+        """
+        if seed is not None:
+            np.random.seed(seed)
+
+        full_board = _generate_rnd_board_using_backtracking(seed)[1]
+
+        elements = [(i, j) for i in range(9) for j in range(9)]
+        np.random.shuffle(elements)  # Randomize the order of the elements
+        for i, j in elements:
+            old_board = full_board.copy()
+            full_board[i, j] = 0
+            if not cls.is_solvable(full_board):
+                full_board = old_board
+
+        new_board = cls()
+        new_board.set_matrix(full_board)
+        return new_board
+
+    def available_values(self, i, j):
+        """ Return the available values for a cell.
+            Args:
+                i (int): Row of the cell.
+                j (int): Column of the cell.
+            Returns:
+                numpy.array: Available values for the cell.
+        """
+        return [v for v in range(9) if self.__values[i, j, v]]
 
     def discover_values(self):
         """ Discover the values of the board using the values of __values.
@@ -216,11 +293,41 @@ class Board(object):
         self.__update_board()
         self.__update_values()
 
+    def is_valid(self):
+        """ Check if the board is valid. i.e., if there are no duplicates in rows, columns and sub-grids.
+            Returns:
+                bool: True if the board is valid, False otherwise.
+        """
+        return _is_a_valid_board(self.__board)
+
+    def is_solved(self):
+        """ Check if the board is solved.
+            Returns:
+                bool: True if the board is solved, False otherwise.
+        """
+        return (self.n_missing_values() == 0) and self
+
+    @classmethod
+    def is_solvable(cls, board):
+        """ Check if the board is solvable.
+            Args:
+                board (numpy.array): Board to be checked.
+            Returns:
+                bool: True if the board is solvable, False otherwise.
+        """
+        b = cls()
+        b.set_matrix(board)
+        return b.solve()
+
     def solve(self):
-        """ Solve the sudoku board. """
-        oldMissing = self.n_missing_values()
+        """ Solve the sudoku board.
+            Returns:
+                bool: True if the board was solved, False otherwise.
+        """
+        old_missing = self.n_missing_values()
         do = True
         while do:
             self.discover_values()
-            do = (oldMissing != self.n_missing_values())
-            oldMissing = self.n_missing_values()
+            do = old_missing != self.n_missing_values()
+            old_missing = self.n_missing_values()
+        return self.n_missing_values() == 0
