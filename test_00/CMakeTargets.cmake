@@ -4,7 +4,7 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
                     ${CMAKE_BINARY_DIR}/CMakeFiles
 )
 
-MESSAGE("Cleaning "${cmake_generated})
+MESSAGE("Cleaning " ${cmake_generated})
 
 foreach(file ${cmake_generated})
     if (EXISTS ${file})

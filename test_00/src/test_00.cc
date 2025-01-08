@@ -5,22 +5,24 @@
 
 int main(void)
 {
-	printf("Program is starting ... \n");
+	printf("\n Program is starting ...\n");
 
 	wiringPiSetup(); // Initialize wiringPi.
-	
-	pinMode(ledPin, OUTPUT);
-	printf("Using pin%d\n",ledPin);
 
-	printf("\n test_00");
-	for(int i = 0; i<10; ++i)
+	pinMode(ledPin, OUTPUT);
+	printf("\n Using pin%d", ledPin);
+
+	printf("\n test_00\n");
+	for (int i = 0; i < 10; ++i)
 	{
+		printf("\n run %d", i);
+		
 		digitalWrite(ledPin, HIGH);
-		printf("led turned on >>>\n");
+		printf("\n led turned on >>>");
 		delay(1000);
 
 		digitalWrite(ledPin, LOW);
-		printf("led turned off <<<\n");
+		printf("\n led turned off <<<\n");
 		delay(1000);
 	}
 	printf("\n");
