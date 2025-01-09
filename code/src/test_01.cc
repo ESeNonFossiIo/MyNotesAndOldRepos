@@ -1,3 +1,4 @@
+// LED + Button
 #include <wiringPi.h>
 #include <stdio.h>
 
@@ -14,7 +15,7 @@ int main(void)
 	pinMode(buttonPin, INPUT); // Set buttonPin to input
 
 	pullUpDnControl(buttonPin, PUD_UP); // pull up to HIGH level
-	
+
 	while (1)
 	{
 		if (digitalRead(buttonPin) == LOW)
