@@ -1,0 +1,99 @@
+% !TEX root = ../../main.tex
+
+\subsection{The Biased Coin Game}
+
+In a box, there are two coins.
+Both are biased: one with probability $p$ for heads and $q$ for tails.
+The second coin has probability $q$ for heads and $p$ for tails (where $p + q = 1$).
+Let $\theta = \max(p, q)$ be the probability of the majority outcome for each respective coin.
+
+\textbf{Game Setup:}
+\begin{itemize}
+    \item A coin is selected uniformly at random from the box.
+    \item The player gets to toss this coin $n$ times to gather information.
+    \item Each toss costs $T$ (total cost: $nT$).
+    \item After the preliminary tosses, the player chooses either ``heads'' or ``tails'' as their prediction.
+    \item The player makes one final toss of the same coin.
+    \item If the final toss matches the player's choice, they win payoff $P$; otherwise, they win $0$.
+\end{itemize}
+
+\textbf{Question:} What is the optimal number of preliminary tosses? What is the optimal strategy?
+
+\textbf{Solution:}
+
+Because the player does not know which coin they hold, they must use the preliminary tosses to infer whether they are holding the heads-biased coin or the tails-biased coin.
+
+\paragraph{Part 1: The Rigorous Proof}
+
+\begin{enumerate}
+    \item \textbf{The Baseline (Zero Information):} Let the two coins be $C_{maj}$ (where the probability of the favored outcome is $\theta$) and $C_{min}$ (where the probability of that same outcome is $1-\theta$). Because a coin is chosen uniformly at random, the prior probabilities are $P(C_{maj}) = P(C_{min}) = 0.5$.
+    
+    If the player does $n=0$ tosses, they must guess blindly. By symmetry, the expected probability of winning without information is exactly the average of the two coins:
+    \begin{equation}
+        \pi(0) = 0.5 \cdot \theta + 0.5 \cdot (1-\theta) = 0.5
+    \end{equation}
+    The expected value of doing zero tosses is $V(0) = 0.5P$.
+    
+    \item \textbf{Bayesian Updating (Why we guess the majority):} Suppose the player tosses the coin $n$ times and observes the favored outcome $X$ times. Using Bayes' Theorem, the posterior odds of holding $C_{maj}$ versus $C_{min}$ are:
+    \begin{equation}
+        \frac{P(C_{maj} \mid X)}{P(C_{min} \mid X)} = \frac{\theta^X (1-\theta)^{n-X}}{(1-\theta)^X \theta^{n-X}} = \left( \frac{\theta}{1-\theta} \right)^{2X - n}
+    \end{equation}
+    Because $\theta > 0.5$, the fraction $\frac{\theta}{1-\theta}$ is strictly greater than $1$. Therefore:
+    \begin{itemize}
+        \item If $X > n/2$, the exponent is positive, the ratio is $> 1$, and $C_{maj}$ is more likely.
+        \item If $X < n/2$, the exponent is negative, the ratio is $< 1$, and $C_{min}$ is more likely.
+    \end{itemize}
+    Thus, the mathematically optimal strategy is to predict the outcome observed most frequently in the preliminary tosses.
+    
+    \item \textbf{The Expected Win Probability $\pi(n)$:} Assuming we drew $C_{maj}$ (by symmetry, the math holds identically for $C_{min}$), the number of favored outcomes observed follows $X \sim \text{Binomial}(n, \theta)$. 
+    
+    We guess correctly if $X > n/2$ (win probability $\theta$), guess incorrectly if $X < n/2$ (win probability $1-\theta$), and tie if $X = n/2$ (win probability $0.5$).
+    \begin{equation}
+        \pi(n) = \theta \cdot P(X > n/2) + (1-\theta) \cdot P(X < n/2) + 0.5 \cdot P(X = n/2)
+    \end{equation}
+    
+    \item \textbf{The Expected Value Function $V(n)$:} The total expected value accounts for the payoff $P$ minus the linear cost of tosses $T$:
+    \begin{equation}
+        V(n) = P \cdot \pi(n) - nT
+    \end{equation}
+    
+    \item \textbf{The Parity Quirk:} It can be shown mathematically that $\pi(2k) = \pi(2k-1)$ for any integer $k \ge 1$. Going from an odd number of tosses to an even number introduces a possibility of a tie that exactly cancels out the marginal information gained. Therefore, an optimal number of tosses $n^*$ will always be an odd number (or zero).
+\end{enumerate}
+
+\paragraph{Part 2: Practical Example ($p = 1/3$, $P = 200$, $T = 5$)}
+
+For $p = 1/3$, the majority probability is $\theta = \max(1/3, 2/3) = 2/3$. We evaluate the expected value $V(n)$ for the first few possible numbers of tosses to find the peak.
+
+\begin{itemize}
+    \item \textbf{For $n = 0$ (Zero tosses):}
+    \begin{align*}
+        \pi(0) &= 0.5 \\
+        V(0) &= 200(0.5) - 0 = 100
+    \end{align*}
+    
+    \item \textbf{For $n = 1$ (One toss):} Here $X \sim \text{Binomial}(1, 2/3)$.
+    \begin{align*}
+        \pi(1) &= \frac{2}{3} \cdot P(X=1) + \frac{1}{3} \cdot P(X=0) = \frac{2}{3}\left(\frac{2}{3}\right) + \frac{1}{3}\left(\frac{1}{3}\right) = \frac{5}{9} \approx 0.555 \\
+        V(1) &= 200\left(\frac{5}{9}\right) - 5(1) = \frac{1000}{9} - 5 \approx 106.11
+    \end{align*}
+    Since $V(1) > V(0)$, doing 1 toss is highly profitable.
+    
+    \item \textbf{For $n = 2$ (Two tosses):} As proven by the parity quirk, $\pi(2) = \pi(1) = 5/9$.
+    \begin{equation*}
+        V(2) = 200\left(\frac{5}{9}\right) - 5(2) \approx 101.11
+    \end{equation*}
+    The expected value drops because you paid for a toss that added no probability.
+    
+    \item \textbf{For $n = 3$ (Three tosses):} Here $X \sim \text{Binomial}(3, 2/3)$.
+    \begin{align*}
+        P(X > 1.5) &= P(X=2) + P(X=3) = 3\left(\frac{4}{9}\right)\left(\frac{1}{3}\right) + \frac{8}{27} = \frac{20}{27} \\
+        P(X < 1.5) &= P(X=0) + P(X=1) = \frac{1}{27} + 3\left(\frac{2}{3}\right)\left(\frac{1}{9}\right) = \frac{7}{27} \\
+        \pi(3) &= \frac{2}{3}\left(\frac{20}{27}\right) + \frac{1}{3}\left(\frac{7}{27}\right) = \frac{40}{81} + \frac{7}{81} = \frac{47}{81} \approx 0.5802 \\
+        V(3) &= 200\left(\frac{47}{81}\right) - 5(3) \approx 116.05 - 15 = 101.05
+    \end{align*}
+\end{itemize}
+
+\textbf{Conclusion:} 
+Comparing the expected values ($V(0) = 100$, $V(1) \approx 106.11$, $V(2) \approx 101.11$, $V(3) \approx 101.05$), the peak is clearly at $n=1$. Even though taking 3 tosses increases the overall win probability to roughly 58\% (up from 55.5\% at 1 toss), the marginal increase in probability ($+2.5\%$, worth about $\$5$ in expected value) does not justify the $\$10$ cost of the two additional tosses. 
+
+The optimal strategy for $p=1/3$, $P=200$, and $T=5$ is to toss the coin exactly $n^* = 1$ time, and predict whichever outcome that single toss lands on.
