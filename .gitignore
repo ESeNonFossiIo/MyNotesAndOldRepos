@@ -1,6 +1,13 @@
-__simulations
-__jobs
-_utils
+# Python
 *.pyc
-*.conf
-!./_template/*.conf
+__pycache__/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editor / OS cruft
+*~
+.DS_Store
+
+# Claude Code local overrides
+**/.claude/settings.local.json

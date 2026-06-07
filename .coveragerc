@@ -1,5 +1,0 @@
-[run]
-source = ./bin,./lib
-
-[report]
-omit = ./lib/__init__.py
